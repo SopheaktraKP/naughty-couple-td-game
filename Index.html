@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naughty T&D for Couples</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Naughty Truth or Dare 😈</h1>
+        <p class="instructions">Remember to communicate and respect boundaries! Each player gets <span id="maxRerolls">3</span> re-rolls per game.</p>
+
+        <div class="player-info">
+            <p>Current Player: <span id="currentPlayer">Player 1</span></p>
+            <p>Player 1 Re-rolls: <span id="player1Rerolls">3</span></p>
+            <p>Player 2 Re-rolls: <span id="player2Rerolls">3</span></p>
+        </div>
+
+        <div class="question-display">
+            <p id="questionText">Click Truth or Dare to start!</p>
+        </div>
+
+        <div class="buttons">
+            <button id="truthBtn">Truth</button>
+            <button id="dareBtn">Dare</button>
+            <button id="rerollBtn">Re-roll</button>
+            <button id="nextPlayerBtn" style="display:none;">Next Player</button>
+        </div>
+
+        <button id="resetGameBtn" class="reset-button">Reset Game</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
