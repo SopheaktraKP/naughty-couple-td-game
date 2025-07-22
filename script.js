@@ -1,5 +1,5 @@
 const truthQuestions = [
-      "What's the naughtiest thought you've had about me that you haven't told me?",
+    "What's the naughtiest thought you've had about me that you haven't told me?",
     "What's one thing you've always wanted to try in bed but haven't?",
     "What's your biggest sexual fantasy involving me?",
     "Where's the most unexpected place you've imagined us getting intimate?",
@@ -99,7 +99,6 @@ const truthQuestions = [
     "What's one specific fantasy involving a specific type of art or performance?",
     "What's the most daring thing you've done to make someone laugh?",
     "What's one specific fantasy involving a specific historical event or setting?",
-    // ... add all 100 truth questions here
 ];
 
 const dareQuestions = [
@@ -203,20 +202,21 @@ const dareQuestions = [
     "Allow me to give you a \"gentle bite\" on your earlobe.",
     "Give me a \"cuddle challenge\" – cuddle for 5 minutes without talking.",
     "Let me give you a \"sensual storytelling\" experience.",
-    // ... add all 100 dare questions here
 ];
 
-const MAX_REROLLS = 3;
-let player1Rerolls = MAX_REROLLS;
-let player2Rerolls = MAX_REROLLS;
+// Removed MAX_REROLLS, player1Rerolls, player2Rerolls variables
+
 let currentPlayer = 1;
 let currentCategory = ''; // To remember if it was a truth or dare
 let currentQuestion = ''; // To track the current question displayed
 
 const questionTextElem = document.getElementById('questionText');
 const currentPlayerElem = document.getElementById('currentPlayer');
+// We'll update the display for re-rolls to show "Unlimited"
 const player1RerollsElem = document.getElementById('player1Rerolls');
 const player2RerollsElem = document.getElementById('player2Rerolls');
+const maxRerollsText = document.getElementById('maxRerolls'); // Get the span for max re-rolls
+
 const truthBtn = document.getElementById('truthBtn');
 const dareBtn = document.getElementById('dareBtn');
 const rerollBtn = document.getElementById('rerollBtn');
@@ -225,8 +225,9 @@ const resetGameBtn = document.getElementById('resetGameBtn');
 
 function updatePlayerInfo() {
     currentPlayerElem.textContent = `Player ${currentPlayer}`;
-    player1RerollsElem.textContent = player1Rerolls;
-    player2RerollsElem.textContent = player2Rerolls;
+    // Always display "Unlimited" for re-rolls
+    player1RerollsElem.textContent = "Unlimited";
+    player2RerollsElem.textContent = "Unlimited";
 }
 
 function getRandomQuestion(category, excludeQuestion = null) {
@@ -254,22 +255,12 @@ function displayQuestion(category) {
 }
 
 function handleReroll() {
-    if (currentPlayer === 1) {
-        if (player1Rerolls > 0) {
-            player1Rerolls--;
-            displayQuestion(currentCategory); // Get new question for same category
-            updatePlayerInfo();
-        } else {
-            alert("Player 1 has no re-rolls left!");
-        }
-    } else { // currentPlayer === 2
-        if (player2Rerolls > 0) {
-            player2Rerolls--;
-            displayQuestion(currentCategory); // Get new question for same category
-            updatePlayerInfo();
-        } else {
-            alert("Player 2 has no re-rolls left!");
-        }
+    // No checks needed for re-roll limits, just provide a new question
+    if (currentCategory) { // Only allow re-roll if a question has been selected
+        displayQuestion(currentCategory); // Get new question for same category
+    } else {
+        questionTextElem.textContent = "Please choose Truth or Dare first!";
+        rerollBtn.disabled = true; // Disable re-roll until a choice is made
     }
 }
 
@@ -288,8 +279,7 @@ function nextPlayerTurn() {
 }
 
 function resetGame() {
-    player1Rerolls = MAX_REROLLS;
-    player2Rerolls = MAX_REROLLS;
+    // Re-rolls are unlimited, so no need to reset their counters
     currentPlayer = 1;
     currentCategory = '';
     currentQuestion = '';
@@ -310,3 +300,5 @@ resetGameBtn.addEventListener('click', resetGame);
 
 // Initial setup
 updatePlayerInfo();
+// Update the initial text on the page to reflect unlimited re-rolls
+maxRerollsText.textContent = "Unlimited";
